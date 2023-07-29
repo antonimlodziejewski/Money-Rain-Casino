@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Money Rain Casino</title>
+<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+</head>
+<body>
+  <h1><b>$$$</b><a href="/"> Money Rain Casino </a><b>$$$</b></h1>
+{% block content %}
+    <div class="container">
+    {% if user.is_authenticated %}
+        <h2>Witamy w Money Rain Casino!</h2>
+        <ul>
+            <li><button type="submit"><a href="/logout/">Wyloguj</a></button></li>
+            <li><button type="submit"><a href="/add_balance/">Wpłać środki</a></button></li>
+        </ul>
+    {% else %}
+        <button type="submit"><a href="/login/">Zaloguj</a></button>
+        <button type="submit"><a href='/registration'>Zarejestruj</a></button>
+    {% endif %}
+    </div>
+{% endblock %}
+{% if user.is_authenticated %}
+    <p class="container">Logged as {{ user.username }}</p>
+{% endif %}
+</body>
+</html>

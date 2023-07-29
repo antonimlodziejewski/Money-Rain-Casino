@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <h1>Balance: {{ user.balance }}</h1>
+    {% endif %}
+    <form method="post" class="container">
+    <label>Player Balance Update</label>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class='container' type="submit">Pay</button>
+    </form>
+{% endblock %}

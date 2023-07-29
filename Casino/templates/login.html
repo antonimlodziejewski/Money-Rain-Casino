@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <form method="post" class="container">
+    <label>Player login</label>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class='container' type="submit">Login</button>
+    </form>
+{% endblock %}
