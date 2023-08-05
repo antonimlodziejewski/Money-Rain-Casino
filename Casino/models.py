@@ -35,3 +35,22 @@ class Bet(models.Model):
         return f"{self.player} - {self.amount}"
 
 
+class GameResult(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    winnings = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    lines = models.IntegerField(default=1)
+    bet_per_line = models.IntegerField(default=10)
+    spin_results = models.JSONField(default=list)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Wynik gry: Gracz ID {self.player_id}, Wygrana: {self.winnings}$, Linie: {self.lines}, Zakład na linię: {self.bet_per_line}$"
+
+
+class Deposit(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    deposit_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Deposit by {self.player.username} - {self.amount}$ at {self.deposit_date}"

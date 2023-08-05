@@ -1,10 +1,13 @@
-/* style.css */
+/* Resetowanie ogólnych stylów */
+body, h1, h2, p, ul, li, a, button, input {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
 }
 
 h1 {
@@ -33,6 +36,7 @@ h1 {
   text-transform: uppercase;
   font-weight: bold;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .button:hover {
@@ -65,34 +69,7 @@ h1 {
   background-color: #e5e5e5;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  font-family: Apple Chancery, cursive;
-  text-align: center;
-  padding: 20px;
-  background-color: #2ecc71;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 2px solid #2ecc71;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Dodatkowy CSS dla pól formularza z klasą .container */
+/* Stylizacja formularzy */
 .container input[type="text"],
 .container input[type="email"],
 .container input[type="password"] {
@@ -111,8 +88,7 @@ h1 {
   border-color: #2ecc71;
 }
 
-
-/* Stylizacja przycisku */
+/* Stylizacja przycisku formularza */
 .container button[type="submit"] {
   background-color: #2ecc71;
   color: #fff;
@@ -128,6 +104,7 @@ h1 {
   background-color: #27ae60;
 }
 
+/* Stylizacja linków */
 a {
   color: #3498db;
   text-decoration: none;
@@ -138,6 +115,7 @@ a:hover {
   color: #2980b9;
 }
 
+/* Stylizacja nagłówka drugiego poziomu */
 h2 {
   font-family: Arial, sans-serif;
   font-size: 24px;
@@ -147,6 +125,7 @@ h2 {
   color: #2ecc71;
 }
 
+/* Stylizacja akapitu */
 p {
   font-family: Arial, sans-serif;
   font-size: 16px;

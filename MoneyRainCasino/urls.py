@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Casino.views import CasinoView, PlayerRegistrationView, CustomLoginView, CustomLogoutView, PlayerBalanceUpdateView
+from Casino.views import CasinoView, PlayerRegistrationView, CustomLoginView, CustomLogoutView, PlayerBalanceUpdateView, \
+    SlotMachineGameView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('add_balance/', PlayerBalanceUpdateView.as_view(), name='balance'),
+    path('slot_machine/', SlotMachineGameView.as_view(), name='slot_machine_game'),
 ]

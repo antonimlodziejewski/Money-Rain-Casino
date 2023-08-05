@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Slot Machine Game{% endblock %}
+
+{% block content %}
+    <h1>Slot Machine Game</h1>
+    <div class="container">
+    <h2>Slot Machine:</h2>
+    <p>Masz {{ balance }}$</p>
+    <p>{{ message }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="bet">Zakład na linię (${{ MIN_BET }} - ${{ MAX_BET }}):</label>
+        <input type="number" id="bet" name="bet" value="{{ bet }}" min="{{ MIN_BET }}" max="{{ MAX_BET }}"><br>
+        <label for="lines">Liczba linii (1 - {{ MAX_LINES }}):</label>
+        <input type="number" id="lines" name="lines" value="{{ lines }}" min="1" max="{{ MAX_LINES }}"><br>
+        <input type="hidden" name="balance" value="{{ balance }}">
+        <button type="submit">Zagraj!</button>
+    </form>
+
+
+    <div class="slot-machine">
+        <!-- Display the slot machine here -->
+        {% for row in slots %}
+        <p>
+            {% for symbol in row %}
+            {{ symbol }}&nbsp;&nbsp;&nbsp;
+            {% endfor %}
+        </p>
+        {% endfor %}
+    </div>
+
+
+    {% if show_winning_lines %}
+    <p>Wygrałeś na liniach: {% for line in winning_lines %}{{ line }}&nbsp;&nbsp;{% endfor %}</p>
+    {% endif %}
+
+    </div>
+{% endblock %}
