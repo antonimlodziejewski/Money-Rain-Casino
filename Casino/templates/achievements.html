@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Achievements{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Your Achievements</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Unlocked Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for achievement in player_achievements %}
+                    <tr>
+                        <td>{{ achievement.name }}</td>
+                        <td>{{ achievement.description }}</td>
+                        <td>{{ achievement.unlocked_date }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

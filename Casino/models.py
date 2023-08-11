@@ -54,3 +54,13 @@ class Deposit(models.Model):
 
     def __str__(self):
         return f"Deposit by {self.player.username} - {self.amount}$ at {self.deposit_date}"
+
+
+class Achievement(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    unlocked_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - Unlocked by: {self.player.username}"

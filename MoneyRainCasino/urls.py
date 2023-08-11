@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Casino.views import CasinoView, PlayerRegistrationView, CustomLoginView, CustomLogoutView, PlayerBalanceUpdateView, \
-    SlotMachineGameView
+    SlotMachineGameView, deposit_history, bet_history, winnings_history, PlayerDeleteView, achievements
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,9 @@ urlpatterns = [
     path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('add_balance/', PlayerBalanceUpdateView.as_view(), name='balance'),
     path('slot_machine/', SlotMachineGameView.as_view(), name='slot_machine_game'),
+    path('deposit_history/', deposit_history, name='deposit-history'),
+    path('bet_history/', bet_history, name='bet-history'),
+    path('winnings_history/', winnings_history, name='win-history'),
+    path('delete_account', PlayerDeleteView.as_view(), name='player-delete'),
+    path('achievements', achievements, name='achievements'),
 ]

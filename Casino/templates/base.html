@@ -4,27 +4,124 @@
 <head>
     <meta charset="UTF-8">
     <title>Money Rain Casino</title>
-<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+
 </head>
 <body>
-  <h1><b>$$$</b><a href="/"> Money Rain Casino </a><b>$$$</b></h1>
+<h1><b>$$$</b><a href="/"> Money Rain Casino </a><b>$$$</b></h1>
 {% block content %}
     <div class="container">
-    {% if user.is_authenticated %}
-        <h2>Witamy w Money Rain Casino!</h2>
-        <ul>
-            <li><button type="submit"><a href="/logout/">Wyloguj</a></button></li>
-            <li><button type="submit"><a href="/add_balance/">Wpłać środki</a></button></li>
-            <li><button type="submit"><a href="/slot_machine">Slot Machine</a></button></li>
-        </ul>
-    {% else %}
-        <button type="submit"><a href="/login/">Zaloguj</a></button>
-        <button type="submit"><a href='/registration'>Zarejestruj</a></button>
-    {% endif %}
+        {% if user.is_authenticated %}
+            <h1>Welcome in the Money Rain Casino!</h1>
+            <div class="menu">
+                <div class="option">
+                    <button type="submit"><a href="/logout/">Logout</a></button>
+                </div>
+                <div class="option">
+                    <button type="submit"><a href="/add_balance/">Add Balance</a></button>
+                </div>
+                <div class="option">
+                    <button type="submit"><a href="/slot_machine">Slot Machine</a></button>
+                </div>
+                <div class="option">
+                    <button type="submit"><a href="/deposit_history/">Deposit History</a></button>
+                </div>
+                <div class="option">
+                    <button type="submit"><a href="/bet_history">Bet History</a></button>
+                </div>
+                <div class="option">
+                    <button type="submit"><a href="/winnings_history">Winnings History</a></button>
+                </div>
+                <div class="option">
+                    <button type="submit"><a href="/achievements">Achievements</a></button>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+            <br class="container">
+            <h2>Welcome to Money Rain Casino!</h2>
+            <p>Get ready for an astonishing adventure in the world of emotions, adrenaline, and wealth. Money Rain
+                Casino is a unique place where your dreams of big wins become reality. Immerse yourself in a luxurious
+                environment where the latest casino games, generous bonuses, and unforgettable experiences await.</p>
+
+            <h2>Our Unique Features:</h2>
+            <ul>
+                <li><strong>Jackpots and Winnings:</strong> Money Rain Casino is a renowned destination where winnings
+                    reach substantial sums. Our progressive games and jackpots can truly transform your life!
+                </li>
+                <li><strong>Mobile Gaming:</strong> Regardless of where you are, you can enjoy our games on any mobile
+                    device. All you need is an internet connection to indulge in entertainment at any moment.
+                </li>
+                <li><strong>Safety and Trust:</strong> Our casino operates on a platform that ensures the highest
+                    standards of security and trust. Your data is protected, and the fairness of games is our top
+                    priority.
+                </li>
+            </ul>
+
+            <p><strong>Join Us Today!</strong></p>
+
+            <p>Prepare for an incredible entertainment experience, exciting games, and a chance to win big as you've
+                dreamed. Money Rain Casino is where the atmosphere of luxury meets the thrill of gambling. Join us today
+                and immerse yourself in a world where the rain of money is within reach.</p>
+            <p><em>Risks associated with casino gaming. Remember that gambling should be a form of entertainment. Always
+                be responsible and mindful of limitations.</em></p>
+            </div>
+
+        {% else %}
+            <ul>
+                <li>
+                    <button type="submit"><a href="/login/">Sign in</a></button>
+                </li>
+                <li>
+                    <button type="submit"><a href='/registration'>First time? Sign up!</a></button>
+                </li>
+            </ul>
+            <br class="container">
+            <h2>Welcome to Money Rain Casino!</h2>
+            <p>Get ready for an astonishing adventure in the world of emotions, adrenaline, and wealth. Money Rain
+                Casino is a unique place where your dreams of big wins become reality. Immerse yourself in a luxurious
+                environment where the latest casino games, generous bonuses, and unforgettable experiences await.</p>
+
+            <h2>Our Unique Features:</h2>
+            <ul>
+                <li><strong>Jackpots and Winnings:</strong> Money Rain Casino is a renowned destination where winnings
+                    reach substantial sums. Our progressive games and jackpots can truly transform your life!
+                </li>
+                <li><strong>Mobile Gaming:</strong> Regardless of where you are, you can enjoy our games on any mobile
+                    device. All you need is an internet connection to indulge in entertainment at any moment.
+                </li>
+                <li><strong>Safety and Trust:</strong> Our casino operates on a platform that ensures the highest
+                    standards of security and trust. Your data is protected, and the fairness of games is our top
+                    priority.
+                </li>
+            </ul>
+
+            <p><strong>Join Us Today!</strong></p>
+
+            <p>Prepare for an incredible entertainment experience, exciting games, and a chance to win big as you've
+                dreamed. Money Rain Casino is where the atmosphere of luxury meets the thrill of gambling. Join us today
+                and immerse yourself in a world where the rain of money is within reach.</p>
+            <p><em>Risks associated with casino gaming. Remember that gambling should be a form of entertainment. Always
+                be responsible and mindful of limitations.</em></p>
+            </div>
+
+        {% endif %}
     </div>
 {% endblock %}
-{% if user.is_authenticated %}
-    <p class="container">Logged as {{ user.username }}</p>
-{% endif %}
+
+
+<div class="list-footer-display">
+    {% if user.is_authenticated %}
+        <div class="container">
+        <h3><p class="container">Logged as {{ user.username }}</p></h3>
+        <div class="menu">
+        <div class="option">
+            <button type="submit"><a href="/delete_account">Delete Account</a></button>
+        </div>
+        </div>
+        </div>
+        <br>
+        <br>
+    {% endif %}
+</div>
 </body>
 </html>

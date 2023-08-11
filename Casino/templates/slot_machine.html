@@ -1,40 +1,191 @@
 {% extends 'base.html' %}
 
-{% block title %}Slot Machine Game{% endblock %}
+<h1><p>$ Slot Machine Game $</p></h1>
 
 {% block content %}
-    <h1>Slot Machine Game</h1>
+    {% load static %}
+    <style>
+        .btn {
+            position: absolute;
+            width: 40%;
+            left: 30%;
+            font-size: 20px;
+            background-color: #2ecc71;
+            font-weight: 900;
+            border: 0;
+            bottom: 20px;
+            border-radius: 5px;
+            color: black;
+        }
+
+        .slot-main {
+            display: block;
+            position: relative;
+            background-color: #353535;
+            width: 500px;
+            height: 200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .slots {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
+
+        .slot {
+            display: inline-block;
+            height: 40px;
+            overflow: hidden;
+
+            .slot-inner {
+                display: block;
+                height: 768px;
+                width: 32px;
+                background-position: 0 0;
+            }
+
+            .loop & {
+                .slot-inner {
+                    -webkit-animation: slide 1s infinite linear;
+                    -moz-animation: slide 1s infinite linear;
+                    animation: slide 1s infinite linear;
+                    border: solid 2px;
+                }
+            }
+
+            &.slot2 .slot-inner {
+                animation-delay: .05s;
+            }
+
+            &.slot3 .slot-inner {
+                animation-delay: .1s;
+            }
+
+        }
+
+        .stop {
+            .slot1 .slot-inner {
+                background-position-y: 55px;
+                -webkit-animation: stop1 .5s normal forwards ease-in-out;
+                -moz-animation: stop1 .5s normal forwards ease-in-out;
+                animation: stop1 .5s normal linear;
+                animation-iteration-count: 1;
+            }
+
+            .slot2 .slot-inner {
+                background-position-y: -45px;
+                -webkit-animation: stop2 .5s normal forwards ease-in-out;
+                -moz-animation: stop2 .5s normal forwards ease-in-out;
+                animation: stop2 .5s normal linear;
+                animation-iteration-count: 1;
+            }
+
+            .slot3 .slot-inner {
+                background-position-y: -105px;
+                -webkit-animation: stop3 .5s normal forwards ease-in-out;
+                -moz-animation: stop3 .5s normal forwards ease-in-out;
+                animation: stop3 .5s normal linear;
+                animation-iteration-count: 1;
+            }
+        }
+
+        @-webkit-keyframes slide {
+            0% {
+                background-position-y: 0;
+            }
+            100% {
+                background-position-y: -500px;
+            }
+        }
+
+
+        @-webkit-keyframes stop1 {
+            0% {
+                background-position-y: 110px;
+            }
+            100% {
+                background-position-y: 55px;
+            }
+        }
+
+        @-webkit-keyframes stop2 {
+            0% {
+                background-position-y: 5px;
+            }
+            100% {
+                background-position-y: -45px;
+            }
+        }
+
+        @-webkit-keyframes stop3 {
+            0% {
+                background-position-y: -55px;
+            }
+            100% {
+                background-position-y: -105px;
+            }
+        }
+
+
+        .background1 {
+            background-image: url('{% static "casino/spin.jpg" %}');
+        }</style>
+    <script>
+        var state = false;
+
+        function myAction() {
+            if (!this.state) {
+                document.querySelector('.slots').classList.remove('loop');
+                setTimeout(function () {
+                    document.querySelector('.slots').classList.add('stop');
+                }, 1);
+            } else {
+                document.querySelector('.slots').classList.remove('stop');
+                document.querySelector('.slots').classList.add('loop');
+            }
+            this.state = !this.state
+        }
+    </script>
     <div class="container">
-    <h2>Slot Machine:</h2>
-    <p>Masz {{ balance }}$</p>
-    <p>{{ message }}</p>
+    <h1>Slot Machine Game</h1>
+    <div class="slot-main">
+        <h2>Slot Machine:</h2>
+        <p>Your balance: {{ balance }}$</p>
+        <h2><p>{{ message }}</p></h2>
 
-    <form method="post">
-        {% csrf_token %}
-        <label for="bet">Zakład na linię (${{ MIN_BET }} - ${{ MAX_BET }}):</label>
-        <input type="number" id="bet" name="bet" value="{{ bet }}" min="{{ MIN_BET }}" max="{{ MAX_BET }}"><br>
-        <label for="lines">Liczba linii (1 - {{ MAX_LINES }}):</label>
-        <input type="number" id="lines" name="lines" value="{{ lines }}" min="1" max="{{ MAX_LINES }}"><br>
-        <input type="hidden" name="balance" value="{{ balance }}">
-        <button type="submit">Zagraj!</button>
-    </form>
+        <form method="post">
+            {% csrf_token %}
+            <label for="bet">Bet per line: (${{ MIN_BET }} - ${{ MAX_BET }}):</label>
+            <input type="number" id="bet" name="bet" value="{{ bet }}" min="{{ MIN_BET }}" max="{{ MAX_BET }}"><br>
+            <label for="lines">Number of lines: (1 - {{ MAX_LINES }}):</label>
+            <input type="number" id="lines" name="lines" value="{{ lines }}" min="1" max="{{ MAX_LINES }}"><br>
+            <input type="hidden" name="balance" value="{{ balance }}">
+            <div class="slot-main">
+                <div class="slots loop">
+                    <div class="slot slot1">
+                        <div class="slot-inner background1"></div>
+                    </div>
 
+                    <div class="slot slot2">
+                        <div class="slot-inner background1"></div>
+                    </div>
 
-    <div class="slot-machine">
-        <!-- Display the slot machine here -->
-        {% for row in slots %}
-        <p>
-            {% for symbol in row %}
-            {{ symbol }}&nbsp;&nbsp;&nbsp;
-            {% endfor %}
-        </p>
-        {% endfor %}
+                    <div class="slot slot3">
+                        <div class="slot-inner background1"></div>
+                    </div>
+                </div>
+                <button class="btn" onClick='myAction()'>HIT IT!</button>
+            </div>
+        </form>
+
+        {% if show_winning_lines %}
+            <p>Wygrałeś na liniach: {% for line in winning_lines %}{{ line }}&nbsp;&nbsp;{% endfor %}</p>
+        {% endif %}
+
     </div>
-
-
-    {% if show_winning_lines %}
-    <p>Wygrałeś na liniach: {% for line in winning_lines %}{{ line }}&nbsp;&nbsp;{% endfor %}</p>
-    {% endif %}
-
     </div>
 {% endblock %}
