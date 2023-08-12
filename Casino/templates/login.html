@@ -2,9 +2,12 @@
 {% load static %}
 {% block content %}
     <form method="post" class="container">
-    <h2>Player login</h2>
+        <h2>Player login</h2>
         {% csrf_token %}
         {{ form.as_p }}
         <button class='container' type="submit">Login</button>
     </form>
+    <div class="container">
+            <button type="submit"><a href='/registration'>First time? Sign up!</a></button>
+    </div>
 {% endblock %}

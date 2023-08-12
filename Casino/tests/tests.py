@@ -5,13 +5,11 @@ from django.urls import reverse
 
 @pytest.mark.django_db
 def test_CasinoView(client):
+    """
+    Tests whether the CasinoView (home page) is accessible and returns a status code of 200 (OK).
+    """
     response = client.get(reverse('home'))
     assert response.status_code == 200
-
-
-@pytest.fixture
-def create_player():
-    return Player.objects.create(username="testuser", balance=100)
 
 
 @pytest.mark.django_db
@@ -39,7 +37,7 @@ def test_CustomLogoutView(client):
     which is expected behavior for an authenticated user.
     """
     response = client.post(reverse('logout'))
-    assert response.status_code == 302  # Redirect expected for authenticated user
+    assert response.status_code == 302
 
 
 @pytest.mark.django_db
@@ -70,7 +68,7 @@ def test_SlotMachineGameView_post(client):
     for a POST request.
     """
     response = client.post(reverse('slot_machine_game'))
-    assert response.status_code == 200  # Adjust the expected status code based on your implementation
+    assert response.status_code == 200
 
 
 @pytest.mark.django_db

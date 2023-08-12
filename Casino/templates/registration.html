@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <form method="post" class="container">
-    <label>Player registration</label>
+    <h2>Player registration</h2>
         {% csrf_token %}
         {{ form.as_p }}
         <button class='container' type="submit">Register</button>
