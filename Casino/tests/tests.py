@@ -1,5 +1,4 @@
 import pytest
-from Casino.models import Player
 from django.urls import reverse
 
 

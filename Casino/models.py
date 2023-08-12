@@ -10,6 +10,9 @@ STATUS = (
 
 
 class Player(AbstractUser):
+    """
+    Custom User model representing a player in the casino application.
+    """
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_winnings = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_losses = models.DecimalField(max_digits=10, decimal_places=2, default=0)
@@ -27,6 +30,9 @@ class Player(AbstractUser):
 
 
 class Bet(models.Model):
+    """
+    Model representing a betting activity of a player.
+    """
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     bet_date = models.DateTimeField(auto_now_add=True)
@@ -36,6 +42,9 @@ class Bet(models.Model):
 
 
 class GameResult(models.Model):
+    """
+    Model representing the result of a casino game played by a player.
+    """
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     winnings = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     lines = models.IntegerField(default=1)
@@ -48,6 +57,9 @@ class GameResult(models.Model):
 
 
 class Deposit(models.Model):
+    """
+    Model representing a deposit made by a player.
+    """
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     deposit_date = models.DateTimeField(auto_now_add=True)
@@ -57,6 +69,9 @@ class Deposit(models.Model):
 
 
 class Achievement(models.Model):
+    """
+    Model representing an achievement unlocked by a player.
+    """
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     description = models.TextField()
